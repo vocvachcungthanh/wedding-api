@@ -4,17 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+use Exception;
 
 class SendEmailController extends Controller
 {
-    public function SendEmail(Request $request){
-        $to_name = $request->name;
-        $to_email = $request->email;
-        $message = $request->message;
+    public function sendEmail(Request $request){
+        try{
+        $to_name = $request->input('name');
+        $to_email = $request->input('email');
+        $messageText = $request->input('mesage');
 
-        Mail::raw($message, function($message) use($to_email, $to_name){
-            $message->to($to_email)->subject($to_name);
+        Mail::send([],[], function ($message) use ($to_email, $to_name, $messageText){
+            $message->to($to_email)
+            ->subject($to_name)
+            ->setBody($message, 'text/html');
         });
 
         return response()->json([
@@ -24,6 +28,15 @@ class SendEmailController extends Controller
             'to_email' => $to_email,
             'message' => "Gửi lời cảm ơn thành công"
         ], 200);
+
+    } catch(Exception $e){
+        return response()->json([
+            'code' => 400,
+            'error' => [
+                'message' => "Email không gửi được"
+            ]
+            ],400);
+        }
     }
 }
 

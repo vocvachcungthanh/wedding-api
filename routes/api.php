@@ -77,7 +77,7 @@ Route::middleware(['LoginToken'])->group(function () {
     Route::post('admin/count-down-create', [CountDownController::class,'create']);
     Route::post('admin/music-create', [MusicController::class,'create']);
     Route::post('admin/music-delete', [MusicController::class,'delete']);
-    Route::post('admin/send-message', [SendEmailController::class,'SendEmail']);
+    Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
 
 });
 
