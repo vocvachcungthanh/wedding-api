@@ -7,14 +7,6 @@ use App\Models\Guestkbook;
 
 class GuestkbookPublicController extends Controller
 {
-    public function index(){
-        $Guestkbooks = Guestkbook::select('id','name','email','desc','created_at')->orderBy('created_at','desc')->get();
-
-        return response()->json([
-            'code'  => 200,
-            'data'  => $Guestkbooks
-        ], 200);
-    }
 
     public function create(Request $request)
     {

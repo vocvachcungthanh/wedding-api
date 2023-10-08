@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\CountDownController;
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\Admin\SendEmailController;
+use App\Http\Controllers\Admin\GuestkbookController;
 
 //public
 use App\Http\Controllers\MenuController;
@@ -78,6 +79,8 @@ Route::middleware(['LoginToken'])->group(function () {
     Route::post('admin/music-create', [MusicController::class,'create']);
     Route::post('admin/music-delete', [MusicController::class,'delete']);
     Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
+    Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
+    Route::get('admin/guestkbooks',[GuestkbookController::class,'index'] );
 
 });
 
@@ -90,5 +93,5 @@ Route::get('/events',[EventPublicController::class,'index']);
 Route::get('/count-down',[CountDownController::class,'index']);
 Route::get('/music',[MusicPublicController::class,'index']);
 Route::post('/guestkbook-create', [GuestkbookPublicController::class,'create']);
-Route::get('/guestkbooks',[GuestkbookPublicController::class,'index'] );
+
 
