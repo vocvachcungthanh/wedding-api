@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Guestkbook;
+use App\Models\Bgs;
 
 class GuestkbookPublicController extends Controller
 {
+    public function index(){
+        $bgGuestkbook = Bgs::where('key', '=', 'guestkbook')->get();
+
+        return response()->json([
+            'data'  => $bgGuestkbook[0]->bg
+        ], 200);
+    }
 
     public function create(Request $request)
     {

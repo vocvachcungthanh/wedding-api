@@ -93,5 +93,6 @@ Route::get('/events',[EventPublicController::class,'index']);
 Route::get('/count-down',[CountDownController::class,'index']);
 Route::get('/music',[MusicPublicController::class,'index']);
 Route::post('/guestkbook-create', [GuestkbookPublicController::class,'create']);
+Route::get('/guestkbooks', [GuestkbookPublicController::class,'index']);
 
 
