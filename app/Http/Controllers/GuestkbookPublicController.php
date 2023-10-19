@@ -10,9 +10,14 @@ class GuestkbookPublicController extends Controller
 {
     public function index(){
         $bgGuestkbook = Bgs::where('key', '=', 'guestkbook')->get();
+        $guestkbooks = Guestkbook::select('id','name','desc')->orderBy('created_at','desc')->get();
 
         return response()->json([
-            'data'  => $bgGuestkbook[0]->bg
+            'data'  => [
+                'data' => $guestkbooks,
+                'bg' =>   $bgGuestkbook[0]->bg
+            ]
+
         ], 200);
     }
 
