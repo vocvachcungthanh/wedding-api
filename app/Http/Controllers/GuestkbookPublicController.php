@@ -15,7 +15,7 @@ class GuestkbookPublicController extends Controller
         return response()->json([
             'data'  => [
                 'data' => $guestkbooks,
-                'bg' =>   $bgGuestkbook[0]->bg
+                'bgGuestkbook' =>   $bgGuestkbook[0]->bg
             ]
 
         ], 200);
