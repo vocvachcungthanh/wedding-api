@@ -18,9 +18,10 @@ use App\Http\Controllers\Admin\CountDownController;
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\Admin\SendEmailController;
 use App\Http\Controllers\Admin\GuestkbookController;
+use App\Http\Controllers\Admin\MenuController;
 
 //public
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MenuPublicController;
 use App\Http\Controllers\SliderPublicControll;
 use App\Http\Controllers\AlbumPublicController;
 use App\Http\Controllers\CoupledPublicController;
@@ -55,7 +56,7 @@ Route::middleware(['LoginToken'])->group(function () {
         'admin/auth'        => AuthController::class,
         'admin/sliders'     => SliderController::class,
         'admin/albums'      => AlbumController::class,
-        'menus'             => MenuController::class,
+        'admin/menus'       => MenuController::class,
         'admin/couples'     => CoupldeController::class,
         'admin/bgs'         => BgsController::class,
         'admin/events'      => EventController::class,
@@ -86,7 +87,7 @@ Route::middleware(['LoginToken'])->group(function () {
 
 
 Route::get('/sliders',[SliderPublicControll::class,'index']);
-Route::get('/menus',[MenuController::class,'index']);
+Route::get('/menus',[MenuPublicController::class,'index']);
 Route::get('/albums/{album}',[AlbumPublicController::class,'index']);
 Route::get('/couples',[CoupledPublicController::class,'index']);
 Route::get('/events',[EventPublicController::class,'index']);

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Menu;
-use App\Helpers\Helper;
 
 class MenuController extends Controller
 {
@@ -15,11 +15,12 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $data = Helper::ConverMenu(Menu::all());
+        $menus = Menu::all();
 
         return response()->json([
             'code'  => 200,
-            'data'  => $data
+
+            'data'  => $menus
         ],200);
     }
 
@@ -86,6 +87,21 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Menu::where('id', $id)->delete();
+
+        if($delete == -1){
+            return response()->json([
+                'code' => 400,
+                'errors' =>[
+                    'message' => "Xóa menu thất bại",
+                ]
+            ], 400);
+        } else {
+            return response()->json([
+                'code' => 200,
+                'data' =>  $id,
+                'message' =>  'Xóa menu thành công'
+            ],200);
+        }
     }
 }

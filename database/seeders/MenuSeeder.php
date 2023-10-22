@@ -28,6 +28,16 @@ class MenuSeeder extends Seeder
 
             [
                 'parent_id'    => 0,
+                'name'         => "Câu chuyện tình yêu",
+                'link'         => "#love-story",
+                'status'       => true,
+                'icon'         => '',
+                'desc'         => '',
+                'created_at'        => now()
+            ],
+
+            [
+                'parent_id'    => 0,
                 'name'         => "Sự kiện",
                 'link'         => "#wedding",
                 'status'       => true,
