@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use Illuminate\Support\Facades\Validator;
 
 class MenuController extends Controller
 {
@@ -76,7 +77,36 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules(), $this->messages(),$this->attributes());
+
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'errors' => $validator->messages()
+            ], 400);
+        } else {
+            $update = Menu::where('id', $id)->update([
+                'name'         => $request-> name,
+                'link'         => $request-> link,
+                'status'       => $request-> status,
+                'updated_at'   => now()
+            ]);
+
+            if($update = 1) {
+                return response()->json([
+                    'code'      => 200,
+                    'data'      => $update,
+                    'message'   => "Cập nhật menu thành công"
+                ], 200);
+            } else {
+                return response()->json([
+                    'code'  => 400,
+                    'errors' => [
+                        'message' => "Cập nhật menu thất bại"
+                    ]
+                ],400);
+            }
+        }
     }
 
     /**
@@ -103,5 +133,31 @@ class MenuController extends Controller
                 'message' =>  'Xóa menu thành công'
             ],200);
         }
+    }
+
+    public function rules()
+    {
+        return [
+            'name'  => 'required',
+            'link'  => 'required',
+            'id'    => 'required'
+
+        ];
+    }
+
+    public function messages(){
+        return [
+            'name.required'  => ':attribute không được bỏ trống',
+            'link.required'  => ':attribute không được bỏ trống',
+            'id.required'    => ':attribute cần cập nhật không tồn tại'
+        ];
+    }
+
+    public function attributes(){
+        return [
+            'name'  => "Menu",
+            'link'  => 'Link menu',
+            'id'    => 'Menu'
+        ];
     }
 }
