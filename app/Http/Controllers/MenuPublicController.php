@@ -15,7 +15,7 @@ class MenuPublicController extends Controller
      */
     public function index()
     {
-        $data = Helper::ConverMenu(Menu::all());
+        $data = Helper::ConverMenu(Menu::where('status', '=', '1')->get());
 
         return response()->json([
             'code'  => 200,

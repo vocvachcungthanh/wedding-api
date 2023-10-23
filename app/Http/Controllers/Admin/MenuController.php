@@ -43,7 +43,38 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rulesCreate(), $this->messagesCreate(),$this->attributesCreate());
+
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'errors' => $validator->messages()
+            ], 400);
+        } else {
+            $create = Menu::create([
+                'name'         => $request-> name,
+                'link'         => $request-> link,
+                'parent_id'    => $request-> parent_id,
+                'status'       => $request-> status,
+                'desc'         => $request-> desc,
+                'created_at' => now()
+            ]);
+
+            if($create) {
+                return response()->json([
+                    'code'      => 200,
+                    'data'      => $create,
+                    'message'   => "Thêm menu thành công"
+                ], 200);
+            } else {
+                return response()->json([
+                    'code'  => 400,
+                    'errors' => [
+                        'message' => "Thêm menu thất bại"
+                    ]
+                ],400);
+            }
+        }
     }
 
     /**
@@ -158,6 +189,29 @@ class MenuController extends Controller
             'name'  => "Menu",
             'link'  => 'Link menu',
             'id'    => 'Menu'
+        ];
+    }
+
+    public function rulesCreate()
+    {
+        return [
+            'name'  => 'required',
+            'link'  => 'required',
+
+        ];
+    }
+
+    public function messagesCreate(){
+        return [
+            'name.required'  => ':attribute không được bỏ trống',
+            'link.required'  => ':attribute không được bỏ trống',
+        ];
+    }
+
+    public function attributesCreate(){
+        return [
+            'name'  => "Menu",
+            'link'  => 'Link menu',
         ];
     }
 }
