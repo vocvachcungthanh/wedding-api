@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\Admin\SendEmailController;
 use App\Http\Controllers\Admin\GuestkbookController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\LoveStoryController;
 
 //public
 use App\Http\Controllers\MenuPublicController;
@@ -61,7 +62,9 @@ Route::middleware(['LoginToken'])->group(function () {
         'admin/bgs'         => BgsController::class,
         'admin/events'      => EventController::class,
         'admin/countdowns'  => CountDownController::class,
-        'admin/music'       => MusicController::class
+        'admin/music'       => MusicController::class,
+        'admin/love-story'  => LoveStoryController::class
+
 
     ]);
 
