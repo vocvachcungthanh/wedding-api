@@ -30,7 +30,7 @@ use App\Http\Controllers\EventPublicController;
 use App\Http\Controllers\CountDownPublicController;
 use App\Http\Controllers\MusicPublicController;
 use App\Http\Controllers\GuestkbookPublicController;
-
+use App\Http\Controllers\LoveStoryPublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,5 +98,5 @@ Route::get('/count-down',[CountDownController::class,'index']);
 Route::get('/music',[MusicPublicController::class,'index']);
 Route::post('/guestkbook-create', [GuestkbookPublicController::class,'create']);
 Route::get('/guestkbooks', [GuestkbookPublicController::class,'index']);
-
+Route::get('/love-story', [LoveStoryPublicController::class,'index']);
 

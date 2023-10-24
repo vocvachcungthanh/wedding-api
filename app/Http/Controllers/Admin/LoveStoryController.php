@@ -16,7 +16,12 @@ class LoveStoryController extends Controller
      */
     public function index()
     {
-        //
+        $loveStory = LoveStory::all();
+
+        return response()->json([
+            'code' => 200,
+            'data' => $loveStory
+        ],200);
     }
 
     /**
@@ -26,7 +31,7 @@ class LoveStoryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
