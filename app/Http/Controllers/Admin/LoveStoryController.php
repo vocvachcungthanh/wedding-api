@@ -109,7 +109,40 @@ class LoveStoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules(), $this->messages(),$this->attributes());
+
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'errors' => $validator->messages()
+            ], 400);
+        } else {
+            $update = LoveStory::where('id', $id)->update([
+                'title'      => $request-> title,
+                'avatar'     => $request-> avatar,
+                'date'       => $request-> date,
+                'desc'       => $request-> desc,
+                'status'     => $request-> status,
+                'google_id'  => $request-> google_id,
+                'source_id'  => $request-> source_id,
+                'updated_at'   => now()
+            ]);
+
+            if($update = 1) {
+                return response()->json([
+                    'code'      => 200,
+                    'data'      => $update,
+                    'message'   => "Cập nhật slider thành công"
+                ], 200);
+            } else {
+                return response()->json([
+                    'code'  => 400,
+                    'errors' => [
+                        'message' => "Cập nhật slider thất bại"
+                    ]
+                ],400);
+            }
+        }
     }
 
     /**
