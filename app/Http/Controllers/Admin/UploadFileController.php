@@ -111,7 +111,7 @@ class UploadFileController extends Controller
                 ]
             ],400);
 
-            $deleteGoogle = Storage::disk('google')->delete($fileinfo['path']);
+            $deleteGoogle = Storage::disk('google')->delete($fileinfo['path'], ["ignore" => true]);
 
             return response()->json([
                 'code' => 200,

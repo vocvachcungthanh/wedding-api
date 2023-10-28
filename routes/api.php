@@ -85,6 +85,8 @@ Route::middleware(['LoginToken'])->group(function () {
     Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
     Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
     Route::get('admin/guestkbooks',[GuestkbookController::class,'index'] );
+    Route::post('admin/lover-story-delete', [LoveStoryController::class,'delete']);
+
 
 });
 

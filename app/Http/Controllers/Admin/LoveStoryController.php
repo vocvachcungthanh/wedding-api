@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\UploadFileController;
 use App\Http\Controllers\Controller;
 use App\Models\LoveStory;
 use Illuminate\Http\Request;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class LoveStoryController extends Controller
 {
+    protected $uploadController;
+
+    public function __construct(UploadFilecontroller $uploadController)
+    {
+        $this->uploadController = $uploadController;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -65,13 +72,13 @@ class LoveStoryController extends Controller
                 return response()->json([
                     'code'      => 200,
                     'data'      => $create,
-                    'message'   => "Thêm menu thành công"
+                    'message'   => "Thêm câu chuyện thành công"
                 ], 200);
             } else {
                 return response()->json([
                     'code'  => 400,
                     'errors' => [
-                        'message' => "Thêm menu thất bại"
+                        'message' => "Thêm câu chuyện thất bại"
                     ]
                 ],400);
             }
@@ -148,12 +155,49 @@ class LoveStoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->id;
+
+        if(is_null($id) || empty($id) || $id <= 0 || !is_numeric($id)){
+            return response()->json([
+                'code' => 400,
+                "message" => "Dữ liệu cần xóa không tồn tại"
+            ], 400);
+        }
+
+        $source = $request->source_id;
+
+        if($source === 2){
+            $googleId = $request->google_id;
+            $this->uploadController->DeleteFile($googleId);
+        }
+
+        $delete =LoveStory::where('id', $id)->delete();
+
+        if($delete == -1){
+            return response()->json([
+                'code' => 400,
+                'errors' =>[
+                    'message' => "Xóa dũ liệu thất bại",
+                ]
+            ], 400);
+        } else {
+            return response()->json([
+                'code' => 200,
+                'data' =>  $id,
+                'message' =>  'Xóa dữ thành công'
+            ],200);
+        }
     }
 
     public function rules()

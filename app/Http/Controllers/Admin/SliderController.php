@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\UploadFileController;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +13,13 @@ use File;
 
 class SliderController extends Controller
 {
+    protected $uploadController;
+
+    public function __construct(UploadFilecontroller $uploadController)
+    {
+        $this->uploadController = $uploadController;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -193,19 +201,7 @@ class SliderController extends Controller
 
         if($source == 2) {
             $googleId = $request->google_id;
-            $dirs = "/";
-            $recursive = true;
-
-            $fileinfo = collect(Storage::disk('google')->listContents($dirs,$recursive))->where('type', 'file')->where('path', $googleId)->first();
-
-            if($fileinfo == null) return response()-> json([
-                'code' => 400,
-                'errors' => [
-                    'message'   => "Không tìm thấy file cần xóa"
-                ]
-            ],400);
-
-            $deleteGoogle = Storage::disk('google')->delete($fileinfo['path']);
+            $this->uploadController->DeleteFile($googleId);
         }
 
         $deleteMsql = Slider::where('id', $id)->delete();
