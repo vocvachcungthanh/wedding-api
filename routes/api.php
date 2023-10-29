@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\SendEmailController;
 use App\Http\Controllers\Admin\GuestkbookController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\LoveStoryController;
+use App\Http\Controllers\Admin\DashboardController;
 
 //public
 use App\Http\Controllers\MenuPublicController;
@@ -63,7 +64,8 @@ Route::middleware(['LoginToken'])->group(function () {
         'admin/events'      => EventController::class,
         'admin/countdowns'  => CountDownController::class,
         'admin/music'       => MusicController::class,
-        'admin/love-story'  => LoveStoryController::class
+        'admin/love-story'  => LoveStoryController::class,
+        'admin/dashboard'  => DashboardController::class
 
 
     ]);
