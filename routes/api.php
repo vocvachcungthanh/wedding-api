@@ -65,8 +65,8 @@ Route::middleware(['LoginToken'])->group(function () {
         'admin/countdowns'  => CountDownController::class,
         'admin/music'       => MusicController::class,
         'admin/love-story'  => LoveStoryController::class,
-        'admin/dashboard'  => DashboardController::class
-
+        'admin/dashboard'   => DashboardController::class,
+        'admin/guestkbooks' => GuestkbookController::class
 
     ]);
 
@@ -86,7 +86,7 @@ Route::middleware(['LoginToken'])->group(function () {
     Route::post('admin/music-delete', [MusicController::class,'delete']);
     Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
     Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
-    Route::get('admin/guestkbooks',[GuestkbookController::class,'index'] );
+
     Route::post('admin/lover-story-delete', [LoveStoryController::class,'delete']);
 
 

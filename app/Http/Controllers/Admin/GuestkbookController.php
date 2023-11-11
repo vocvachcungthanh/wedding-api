@@ -21,4 +21,33 @@ class GuestkbookController extends Controller
             ]
         ], 200);
     }
+
+    public function destroy($id)
+    {
+     
+
+        if(is_null($id) || empty($id) || $id <= 0 || !is_numeric($id)){
+            return response()->json([
+                'code' => 400,
+                "message" => "Dữ liệu cần xóa không tồn tại"
+            ], 400);
+        }
+
+        $delete =Guestkbook::where('id', $id)->delete();
+
+        if($delete == -1){
+            return response()->json([
+                'code' => 400,
+                'errors' =>[
+                    'message' => "Xóa dữ liệu thất bại",
+                ]
+            ], 400);
+        } else {
+            return response()->json([
+                'code' => 200,
+                'data' =>  $id,
+                'message' =>  'Xóa dữ liệu thành công'
+            ],200);
+        }
+    }
 }
