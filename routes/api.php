@@ -21,6 +21,8 @@ use App\Http\Controllers\Admin\GuestkbookController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\LoveStoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\BridesmaidsGroomsmenController;
+
 
 //public
 use App\Http\Controllers\MenuPublicController;
@@ -32,6 +34,8 @@ use App\Http\Controllers\CountDownPublicController;
 use App\Http\Controllers\MusicPublicController;
 use App\Http\Controllers\GuestkbookPublicController;
 use App\Http\Controllers\LoveStoryPublicController;
+use App\Http\Controllers\BridesmaidsGroomsmenPublicController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,18 +59,19 @@ Route::apiResources([
 
 Route::middleware(['LoginToken'])->group(function () {
     Route::apiResources([
-        'admin/auth'        => AuthController::class,
-        'admin/sliders'     => SliderController::class,
-        'admin/albums'      => AlbumController::class,
-        'admin/menus'       => MenuController::class,
-        'admin/couples'     => CoupldeController::class,
-        'admin/bgs'         => BgsController::class,
-        'admin/events'      => EventController::class,
-        'admin/countdowns'  => CountDownController::class,
-        'admin/music'       => MusicController::class,
-        'admin/love-story'  => LoveStoryController::class,
-        'admin/dashboard'   => DashboardController::class,
-        'admin/guestkbooks' => GuestkbookController::class
+        'admin/auth'                    => AuthController::class,
+        'admin/sliders'                 => SliderController::class,
+        'admin/albums'                  => AlbumController::class,
+        'admin/menus'                   => MenuController::class,
+        'admin/couples'                 => CoupldeController::class,
+        'admin/bgs'                     => BgsController::class,
+        'admin/events'                  => EventController::class,
+        'admin/countdowns'              => CountDownController::class,
+        'admin/music'                   => MusicController::class,
+        'admin/love-story'              => LoveStoryController::class,
+        'admin/dashboard'               => DashboardController::class,
+        'admin/guestkbooks'             => GuestkbookController::class,
+        'admin/bridesmaids-groomsmen'   => BridesmaidsGroomsmenController::class
 
     ]);
 
@@ -85,7 +90,6 @@ Route::middleware(['LoginToken'])->group(function () {
     Route::post('admin/music-create', [MusicController::class,'create']);
     Route::post('admin/music-delete', [MusicController::class,'delete']);
     Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
-    Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
 
     Route::post('admin/lover-story-delete', [LoveStoryController::class,'delete']);
 
@@ -103,4 +107,6 @@ Route::get('/music',[MusicPublicController::class,'index']);
 Route::post('/guestkbook-create', [GuestkbookPublicController::class,'create']);
 Route::get('/guestkbooks', [GuestkbookPublicController::class,'index']);
 Route::get('/love-story', [LoveStoryPublicController::class,'index']);
+Route::get('/bridesmaids-groomsmen', [BridesmaidsGroomsmenPublicController::class,'index']);
+
 

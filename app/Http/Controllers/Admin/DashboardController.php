@@ -13,6 +13,7 @@ use App\Models\Guestkbook;
 use App\Models\LoveStory;
 use App\Models\Menu;
 use App\Models\Music;
+use App\Models\BridesmaidsGroomsmen;
 class DashboardController extends Controller
 {
     public function index(){
@@ -25,18 +26,20 @@ class DashboardController extends Controller
         $totalLoveStory= LoveStory::count();
         $totalMenu= Menu::count();
         $totallMusic= Music::count();
+        $totalBridesmaidsGroomsmen = BridesmaidsGroomsmen::count();
 
         return response()->json([
            "data" => [
-            "sliders"      => $totalSlider,
-            "couples"      => $totalCouple,
-            "love-story"   => $totalLoveStory,
-            "albums"       => $totalAlbum,
-            "events"       => $totalEvent,
-            "count-down"   => $totalCountDown,
-            "music"        => $totallMusic,
-            "guestkbook"   => $totalGuestkbook,
-            "menus"         => $totalMenu,
+            "sliders"               => $totalSlider,
+            "couples"               => $totalCouple,
+            "love-story"            => $totalLoveStory,
+            "albums"                => $totalAlbum,
+            "events"                => $totalEvent,
+            "count-down"            => $totalCountDown,
+            "music"                 => $totallMusic,
+            "guestkbook"            => $totalGuestkbook,
+            "menus"                 => $totalMenu,
+            "bridesmaids-groomsmen" => $totalBridesmaidsGroomsmen
            ]
         ]);
 
