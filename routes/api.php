@@ -83,6 +83,7 @@ Route::middleware(['LoginToken'])->group(function () {
     Route::post('admin/album-create', [AlbumController::class,'create']);
     Route::post('admin/album-status', [AlbumController::class,'edit']);
     Route::post('admin/album-delete', [AlbumController::class,'delete']);
+    Route::get('admin/album-on/{id}',[AlbumController::class,'getAlbumsId']);
     Route::post('admin/couple-create', [CoupldeController::class,'create']);
     Route::post('admin/bgs-create', [BgsController::class,'create']);
     Route::post('admin/event-create', [EventController::class,'create']);
@@ -92,6 +93,7 @@ Route::middleware(['LoginToken'])->group(function () {
     Route::post('admin/send-message', [SendEmailController::class,'sendEmail']);
 
     Route::post('admin/lover-story-delete', [LoveStoryController::class,'delete']);
+
 
 
 });

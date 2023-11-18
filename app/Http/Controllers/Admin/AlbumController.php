@@ -225,4 +225,28 @@ class AlbumController extends Controller
 
 
     }
+
+    /**
+      * @param  int  $id
+     */
+
+    public function getAlbumsId($id){
+        $album = Album::where('id', '=', $id)->get();
+
+        if(count($album) == 0){
+            return response()->json([
+                'code' => 400,
+                'errors' => [
+                    'message' => "Dữ liệu cần sửa không tồn tại"
+                    ]
+                ],400);
+        } else {
+            return response()->json([
+                'code' => 200,
+                'data' => $album[0]
+            ], 200);
+        }
+
+        
+    }
 }
